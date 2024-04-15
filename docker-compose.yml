@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0.27
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
+      - MYSQL_DATABASE=wpress_db
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=admin123
+    expose:
+      - 3306
+      - 33060
+  gmi-wp-image:
+    #image: wordpress:latest
+    build: .
+    volumes:
+      - wp_data:/var/www/html
+    ports:
+      - 8088:80
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=admin123
+      - WORDPRESS_DB_NAME=wpress_db
+volumes:
+  wp_data:
+    
+    
